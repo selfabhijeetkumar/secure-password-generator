@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container" role="main">
+        <header>
+            <h1>Secure Password Generator</h1>
+            <p class="subtitle">Generate strong, secure passwords instantly</p>
+        </header>
+
+        <section class="password-display" aria-labelledby="password-label">
+            <label id="password-label" class="visually-hidden">Generated Password</label>
+            <div class="password-field-wrapper">
+                <input 
+                    type="password" 
+                    id="password-display" 
+                    class="password-field" 
+                    readonly 
+                    aria-readonly="true"
+                    placeholder="Your generated password will appear here"
+                >
+                <button 
+                    type="button" 
+                    id="toggle-password" 
+                    class="icon-button" 
+                    aria-label="Toggle password visibility"
+                    title="Show/hide password"
+                >
+                    <span class="eye-icon" aria-hidden="true">👁</span>
+                </button>
+            </div>
+            <div class="copy-section">
+                <button type="button" id="copy-btn" class="btn btn-secondary">
+                    <span class="btn-icon" aria-hidden="true">📋</span>
+                    Copy Password
+                </button>
+                <span id="copy-message" class="copy-message" role="status" aria-live="polite"></span>
+            </div>
+        </section>
+
+        <section class="controls" aria-labelledby="controls-label">
+            <h2 id="controls-label" class="visually-hidden">Password Generation Controls</h2>
+            
+            <!-- Length Slider -->
+            <div class="control-group">
+                <label for="length-slider" id="length-label">Password Length: <span id="length-value">16</span></label>
+                <div class="slider-container">
+                    <input 
+                        type="range" 
+                        id="length-slider" 
+                        min="4" 
+                        max="50" 
+                        value="16"
+                        aria-labelledby="length-label"
+                        aria-describedby="length-value"
+                    >
+                    <div class="slider-labels">
+                        <span>4</span>
+                        <span>50</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character Options -->
+            <fieldset class="character-options">
+                <legend>Character Types</legend>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span class="checkbox-custom" aria-hidden="true"></span>
+                        Uppercase (A-Z)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span class="checkbox-custom" aria-hidden="true"></span>
+                        Lowercase (a-z)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="numbers" checked>
+                        <span class="checkbox-custom" aria-hidden="true"></span>
+                        Numbers (0-9)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="symbols" checked>
+                        <span class="checkbox-custom" aria-hidden="true"></span>
+                        Symbols (!@#$%^&*)
+                    </label>
+                </div>
+                <p id="error-message" class="error-message" role="alert" aria-live="assertive"></p>
+            </fieldset>
+
+            <!-- Generate Buttons -->
+            <div class="button-group">
+                <button type="button" id="generate-btn" class="btn btn-primary">
+                    Generate Password
+                </button>
+                <button type="button" id="regenerate-btn" class="btn btn-accent">
+                    Regenerate
+                </button>
+            </div>
+        </section>
+
+        <!-- Strength Indicator -->
+        <section class="strength-section" aria-labelledby="strength-label">
+            <h3 id="strength-label">Password Strength</h3>
+            <div class="strength-bar-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Password strength indicator">
+                <div id="strength-bar" class="strength-bar"></div>
+            </div>
+            <div class="strength-info">
+                <span id="strength-text" class="strength-text">Select character options</span>
+                <span id="entropy-text" class="entropy-text"></span>
+            </div>
+        </section>
+
+        <!-- Optional: Password History -->
+        <section class="history-section" aria-labelledby="history-label">
+            <h3 id="history-label">Recent Passwords</h3>
+            <ul id="password-history" class="password-history" aria-label="Password history">
+            </ul>
+            <button type="button" id="clear-history-btn" class="btn btn-small">Clear History</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
